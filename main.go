@@ -8,6 +8,16 @@ import (
 
 func main() {
 	fmt.Println("Hello world")
-	blockchain.PrintBlock()
+	blockchain.Hello()
+
+	//create a new Blockchain instance w/mining difficulty of 2
+	blockchain := blockchain.CreateBlockshain(2)
+
+	//add transactions
+	blockchain.AddBlock("Ken", "phil", 54, "owed phil money")
+	blockchain.AddBlock("Phil", "Ken", 23, "partial refund")
+
+	//check for validity
+	fmt.Println(blockchain.IsValid())
 
 }
