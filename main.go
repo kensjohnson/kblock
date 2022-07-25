@@ -20,4 +20,9 @@ func main() {
 	//check for validity
 	fmt.Println(blockchain.IsValid())
 
+	//print the entire chain
+	for _, block := range blockchain.Chain {
+		block.Print()
+	}
+
 }

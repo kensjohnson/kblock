@@ -39,6 +39,19 @@ func (b *Block) mine(difficulty int) {
 	}
 }
 
+//Print will produce formatted output on stdout of the contents of a Block
+func (b Block) Print() {
+	fmt.Println("Block Info")
+	fmt.Printf("Timestamp\t %s\n", b.Timestamp.String())
+	fmt.Printf("Hash:\t %x\n", b.Hash)
+	fmt.Printf("Prev Hash:\t %x\n", b.PreviousHash)
+	fmt.Printf("POW:\t\t %d\n", b.POW)
+	fmt.Printf("Note:\t %s\n", b.Note)
+	fmt.Printf("Date:\t %s\n", b.Data) //TODO: look into the fmt of the amount field in the Map
+	fmt.Println("----------")
+
+}
+
 //Blockchain is the list of valid blocks in the chain
 type Blockchain struct {
 	GenesisBlock Block
@@ -78,6 +91,7 @@ func (b *Blockchain) AddBlock(from, to string, amount float64, note string) {
 	}
 	newBlock.mine(b.Difficulty)
 	b.Chain = append(b.Chain, newBlock)
+
 }
 
 //IsValid walks the Blockchain to isure that none of the nodes have
