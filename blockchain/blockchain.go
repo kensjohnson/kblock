@@ -13,7 +13,7 @@ import (
 
 //Block is the core structure and is managed ont he BlockChain
 type Block struct {
-	Data         map[string]interface{}
+	Data         string
 	Hash         string
 	PreviousHash string
 	Timestamp    time.Time
@@ -23,8 +23,9 @@ type Block struct {
 
 //calculateHash is an PKG visible function to derive the block hash for a block of data
 func (b Block) calculateHash() string {
-	data, _ := json.Marshal(b.Data)
-	blockData := b.PreviousHash + string(data) + b.Timestamp.String() + strconv.Itoa(b.POW)
+	//	data, _ := json.Marshal(b.Data)
+	//	fmt.Printf("DEBUG: Marshalled data: <%s>\n", data)
+	blockData := b.PreviousHash + b.Data + b.Timestamp.String() + strconv.Itoa(b.POW)
 	blockHash := sha256.Sum256([]byte(blockData))
 	return fmt.Sprintf("%x", blockHash)
 }
@@ -82,9 +83,10 @@ func (b *Blockchain) AddBlock(from, to string, amount float64, note string) {
 		"amount": amount,
 		"note":   note,
 	}
+	blockdataJSON, _ := json.Marshal(blockdata)
 	lastBlock := b.Chain[len(b.Chain)-1]
 	newBlock := Block{
-		Data:         blockdata,
+		Data:         string(blockdataJSON),
 		PreviousHash: lastBlock.Hash,
 		Timestamp:    time.Now(),
 		Note:         note,
