@@ -13,6 +13,7 @@ import (
 
 //Block is the core structure and is managed ont he BlockChain
 type Block struct {
+	// TODO #8 convert to a Transaction structure persisted as JSON
 	Data         string
 	Hash         string
 	PreviousHash string
