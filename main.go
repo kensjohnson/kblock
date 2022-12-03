@@ -24,6 +24,16 @@ func main() {
 		Note:         "heres a note",
 	}
 	blockchain.AddBlock(t1)
+	//add Transaction
+	t2 := transaction.Transaction{
+		SourceSystem: "System 2",
+		SourceID:     "ID 2",
+		From:         "from me",
+		To:           "to you",
+		Amount:       122.75,
+		Note:         "heres another  note",
+	}
+	blockchain.AddBlock(t2)
 
 	//check for validity
 	fmt.Println(blockchain.IsValid())
